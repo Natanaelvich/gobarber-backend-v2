@@ -1,4 +1,5 @@
 import { startOfDay } from 'date-fns';
+import { getCustomRepository } from 'typeorm';
 import Appontment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
@@ -8,25 +9,23 @@ interface Request {
 }
 
 class CreateAppointmentsService {
-  private appointmentsRepository: AppointmentsRepository;
+  public async execute({ provider, date }: Request): Promise<Appontment> {
+    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
-  constructor(appointmentsRepository: AppointmentsRepository) {
-    this.appointmentsRepository = appointmentsRepository;
-  }
-
-  public execute({ provider, date }: Request): Appontment {
     const appointmentDate = startOfDay(date);
 
-    const dateExists = this.appointmentsRepository.findByDate(appointmentDate);
+    const dateExists = await appointmentsRepository.findByDate(appointmentDate);
 
     if (dateExists) {
       throw Error('date already exists');
     }
 
-    const appointment = this.appointmentsRepository.create({
+    const appointment = appointmentsRepository.create({
       provider,
       date: appointmentDate,
     });
+
+    await appointmentsRepository.save(appointment);
 
     return appointment;
   }
