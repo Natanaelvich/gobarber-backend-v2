@@ -2,6 +2,7 @@ import { startOfDay } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 import Appontment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
+import AppError from '../errors/AppError';
 
 interface Request {
   provider_id: string;
@@ -17,7 +18,7 @@ class CreateAppointmentsService {
     const dateExists = await appointmentsRepository.findByDate(appointmentDate);
 
     if (dateExists) {
-      throw Error('date already exists');
+      throw new AppError('date already exists');
     }
 
     const appointment = appointmentsRepository.create({
