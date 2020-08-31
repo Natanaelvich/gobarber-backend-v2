@@ -2,3 +2,10 @@ package-lock.json
 yarn.lock
 /node_modules
 /dist
+/build
+/.idea
+/.vscode
+/temp
+
+tmp/*
+!tmp/.gitkeep
