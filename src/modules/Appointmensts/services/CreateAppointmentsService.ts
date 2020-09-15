@@ -1,8 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { startOfDay } from 'date-fns';
-import { getCustomRepository } from 'typeorm';
 import Appontment from '../infra/typeorm/entities/Appointment';
-import AppointmentsRepository from '../infra/typeorm/repositories/AppointmentsRepository';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface Request {
   provider_id: string;
@@ -10,23 +9,23 @@ interface Request {
 }
 
 class CreateAppointmentsService {
-  public async execute({ provider_id, date }: Request): Promise<Appontment> {
-    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+  constructor(private appointmentsRepository: IAppointmentsRepository) {}
 
+  public async execute({ provider_id, date }: Request): Promise<Appontment> {
     const appointmentDate = startOfDay(date);
 
-    const dateExists = await appointmentsRepository.findByDate(appointmentDate);
+    const dateExists = await this.appointmentsRepository.findByDate(
+      appointmentDate,
+    );
 
     if (dateExists) {
       throw new AppError('date already exists');
     }
 
-    const appointment = appointmentsRepository.create({
+    const appointment = await this.appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
     });
-
-    await appointmentsRepository.save(appointment);
 
     return appointment;
   }

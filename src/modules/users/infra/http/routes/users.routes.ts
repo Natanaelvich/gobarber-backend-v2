@@ -1,26 +1,20 @@
 import { Router, Request, Response } from 'express';
-import { getRepository } from 'typeorm';
 import multer from 'multer';
 import upload from '@config/upload';
 import CreateUserService from '@modules/users/services/CreateUserService';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
-import User from '../../typeorm/entities/User';
+import UserReposiory from '../../typeorm/repositories/UserReposiory';
 
 const usersRouter = Router();
 
 const uploader = multer(upload);
 
-usersRouter.get('/', async (request: Request, response: Response) => {
-  const usersRepository = getRepository(User);
-  const users = await usersRepository.find();
-  response.json(users);
-});
-
 usersRouter.post('/', async (request: Request, response: Response) => {
   const { name, email, password } = request.body;
 
-  const createUser = new CreateUserService();
+  const usersRepository = new UserReposiory();
+  const createUser = new CreateUserService(usersRepository);
 
   const user = await createUser.execute({
     name,
@@ -38,7 +32,8 @@ usersRouter.patch(
   ensureAuthenticated,
   uploader.single('avatar'),
   async (request: Request, response: Response) => {
-    const updateUserAvatar = new UpdateUserAvatarService();
+    const usersRepository = new UserReposiory();
+    const updateUserAvatar = new UpdateUserAvatarService(usersRepository);
 
     const user = await updateUserAvatar.execute({
       user_id: request.user.id,
