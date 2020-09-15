@@ -3,9 +3,12 @@
   "host": "localhost",
   "port": 3306,
   "username": "root",
-  "password": "12345",
+  "password": "password",
   "database": "gobarber",
-  "entities": ["./src/models/*.ts"],
+  "entities": [
+    "@modules/users/infra/typeorm/entities*.ts",
+    "@modules/appointments/infra/typeorm/entities*.ts"
+  ],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./src/database/migrations"

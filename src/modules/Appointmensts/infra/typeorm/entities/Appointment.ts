@@ -1,3 +1,4 @@
+import User from '@modules/users/infra/typeorm/entities/User';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,10 +7,9 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import User from './User';
 
 @Entity('appointments')
-class Appontment {
+class Appointment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -30,4 +30,4 @@ class Appontment {
   updated_at: Date;
 }
 
-export default Appontment;
+export default Appointment;

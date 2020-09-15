@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "tsnd ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
@@ -35,6 +35,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.1.0",
     "ts-node-dev": "^1.0.0-pre.58",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.0.2"
   }
 }

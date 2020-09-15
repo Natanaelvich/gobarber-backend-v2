@@ -2,4 +2,4 @@ import { createConnection } from 'typeorm';
 
 createConnection()
   .then(() => console.log('connection database success'))
-  .catch(() => console.log('connection database failure'));
+  .catch(err => console.log('connection database failure', err));

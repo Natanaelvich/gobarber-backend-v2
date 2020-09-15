@@ -4,11 +4,10 @@ import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 
+import '@shared/infra/typeorm';
+import upload from '@config/upload';
+import AppError from '@shared/errors/AppError';
 import routes from './routes';
-
-import './database';
-import upload from './config/upload';
-import AppError from './errors/AppError';
 
 const app = express();
 
@@ -24,6 +23,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       message: err.message,
     });
   }
+
+  console.log(err);
 
   return response.status(500).json({
     status: 'error',
