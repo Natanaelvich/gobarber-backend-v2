@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ICreateAppointmentDTO from '@modules/Appointmensts/dtos/ICreateAppointmentDTO';
 import IAppointmentsRepository from '@modules/Appointmensts/repositories/IAppointmentsRepository';
 import { isEqual } from 'date-fns';
-import Appointment from '../infra/typeorm/entities/Appointment';
+import Appointment from '@modules/Appointmensts/infra/typeorm/entities/Appointment';
 
 class FakeAppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = [];

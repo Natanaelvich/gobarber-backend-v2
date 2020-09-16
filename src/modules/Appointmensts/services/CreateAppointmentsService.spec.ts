@@ -1,5 +1,5 @@
 import AppError from '@shared/errors/AppError';
-import FakeAppointmentsRepository from '../repositories/FakeAppointmentsRepository';
+import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentsService from './CreateAppointmentsService';
 
 describe('CreateApppointment', () => {

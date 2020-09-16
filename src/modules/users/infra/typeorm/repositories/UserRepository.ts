@@ -37,8 +37,6 @@ class UserRepository implements IUserRepository {
 
     const user = await this.save(response);
 
-    delete user.password;
-
     return user;
   }
 
