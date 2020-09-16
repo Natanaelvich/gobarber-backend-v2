@@ -3,7 +3,7 @@ import IUserRepository from '@modules/users/repositories/IUserRepository';
 import { getRepository, Repository } from 'typeorm';
 import User from '../entities/User';
 
-class UserReposiory implements IUserRepository {
+class UserRepository implements IUserRepository {
   private ormRepository: Repository<User>;
 
   constructor() {
@@ -49,4 +49,4 @@ class UserReposiory implements IUserRepository {
   }
 }
 
-export default UserReposiory;
+export default UserRepository;
