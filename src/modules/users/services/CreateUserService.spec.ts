@@ -1,11 +1,17 @@
 import FakeUserRepository from '@modules/users/repositories/fakes/FakeUserRepository';
 import CreateUserService from '@modules/users/services/CreateUserService';
 import AppError from '@shared/errors/AppError';
+import FakeBCryptHashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider copy';
 
 describe('CreateApppointment', () => {
   it('should be able to create a new user', async () => {
     const fakeUserRepository = new FakeUserRepository();
-    const createUser = new CreateUserService(fakeUserRepository);
+    const fakeBCryptHashProvider = new FakeBCryptHashProvider();
+
+    const createUser = new CreateUserService(
+      fakeUserRepository,
+      fakeBCryptHashProvider,
+    );
 
     const user = await createUser.execute({
       name: 'natanael',
@@ -19,7 +25,12 @@ describe('CreateApppointment', () => {
 
   it('should not be able to create a new user with same email', async () => {
     const fakeUserRepository = new FakeUserRepository();
-    const createUser = new CreateUserService(fakeUserRepository);
+    const fakeBCryptHashProvider = new FakeBCryptHashProvider();
+
+    const createUser = new CreateUserService(
+      fakeUserRepository,
+      fakeBCryptHashProvider,
+    );
 
     const email = 'natanael@gmail.com';
 
