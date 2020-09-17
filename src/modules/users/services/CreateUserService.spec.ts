@@ -3,7 +3,7 @@ import CreateUserService from '@modules/users/services/CreateUserService';
 import AppError from '@shared/errors/AppError';
 import FakeBCryptHashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider copy';
 
-describe('CreateApppointment', () => {
+describe('Create new user', () => {
   it('should be able to create a new user', async () => {
     const fakeUserRepository = new FakeUserRepository();
     const fakeBCryptHashProvider = new FakeBCryptHashProvider();

@@ -1,4 +1,5 @@
 import '@modules/users/providers/index';
+import './providers';
 import AppointmentsRepository from '@modules/Appointmensts/infra/typeorm/repositories/AppointmentsRepository';
 import IAppointmentsRepository from '@modules/Appointmensts/repositories/IAppointmentsRepository';
 import UserRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
