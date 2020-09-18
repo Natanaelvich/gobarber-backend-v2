@@ -29,7 +29,7 @@ For development, you will only need Node.js installed on your environement.
 - [Prettier](https://prettier.io/docs/en/index.html) is an opinionated code formatter.
 - [Typecript](https://www.typescriptlang.org/) TypeScript extends JavaScript by adding types.
 
-## applied concepts
+# Applied concepts
 
 ### S.O.L.I.D
 
@@ -43,7 +43,7 @@ For development, you will only need Node.js installed on your environement.
 
 Domain-driven Design (DDD), described at its highest level of abstraction, basically refers to the two major layers of data design, strategic design and tactical design so that it will not be possible to successfully implement tactical design techniques without first applying strategic design practices.
 
-# TDD
+### TDD
 
 TDD is an acronym for Test Driven Development. The idea of ​​TDD is that you work in cycles. These cycles occur in the following order:
 • First, write a unit test that will initially fail, considering that the code has not yet been implemented;
