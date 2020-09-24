@@ -5,6 +5,7 @@ import IAppointmentsRepository from '@modules/Appointmensts/repositories/IAppoin
 import UserRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
 import { container } from 'tsyringe';
+import IUserTokenRepository from '@modules/users/repositories/IUserTokenRepository';
 
 container.registerSingleton<IAppointmentsRepository>(
   'AppointmentsRepository',
@@ -12,3 +13,4 @@ container.registerSingleton<IAppointmentsRepository>(
 );
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
+// container.registerSingleton<IUserTokenRepository>('UserRepository', UserTo);
