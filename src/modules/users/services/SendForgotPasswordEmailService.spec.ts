@@ -1,5 +1,5 @@
 import FakeUserRepository from '@modules/users/repositories/fakes/FakeUserRepository';
-import FakeMailProvider from '@shared/container/providers/MailProvider/implementations/DiskStorageProvider';
+import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider';
 import AppError from '@shared/errors/AppError';
 import FakeUserTokenRepository from '../repositories/fakes/FakeUserTokenRepository';
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService';
