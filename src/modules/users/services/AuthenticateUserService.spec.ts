@@ -4,20 +4,27 @@ import FakeBCryptHashProvider from '../providers/HashProvider/fakes/FakeBCryptHa
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserService from './CreateUserService';
 
+let fakeUserRepository: FakeUserRepository;
+let fakeBCryptHashProvider: FakeBCryptHashProvider;
+let authenticateUser: AuthenticateUserService;
+let createUser: CreateUserService;
 describe('Autheticate user', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    fakeBCryptHashProvider = new FakeBCryptHashProvider();
+
+    authenticateUser = new AuthenticateUserService(
+      fakeUserRepository,
+      fakeBCryptHashProvider,
+    );
+
+    createUser = new CreateUserService(
+      fakeUserRepository,
+      fakeBCryptHashProvider,
+    );
+  });
+
   it('should be able to create a new authentication', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeBCryptHashProvider = new FakeBCryptHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
-      fakeBCryptHashProvider,
-    );
-
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeBCryptHashProvider,
-    );
     const user = await createUser.execute({
       name: 'natanael',
       password: '123456',
@@ -34,14 +41,6 @@ describe('Autheticate user', () => {
   });
 
   it('should not be able to authenticate with non existing user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeBCryptHashProvider = new FakeBCryptHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
-      fakeBCryptHashProvider,
-    );
-
     await expect(
       authenticateUser.execute({
         password: '123456',
@@ -51,18 +50,6 @@ describe('Autheticate user', () => {
   });
 
   it('should not be able to authenticate with incorrect password', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeBCryptHashProvider = new FakeBCryptHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUserRepository,
-      fakeBCryptHashProvider,
-    );
-
-    const createUser = new CreateUserService(
-      fakeUserRepository,
-      fakeBCryptHashProvider,
-    );
     await createUser.execute({
       name: 'natanael',
       password: '123456',
