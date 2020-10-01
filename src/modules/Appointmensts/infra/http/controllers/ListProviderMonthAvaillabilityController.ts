@@ -2,7 +2,7 @@ import ListProviderService from '@modules/Appointmensts/services/ListProviderSer
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-export default class ProvidersController {
+export default class ListProviderMonthAvaillabilityController {
   public async index(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
 

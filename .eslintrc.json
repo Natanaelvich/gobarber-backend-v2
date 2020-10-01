@@ -19,6 +19,7 @@
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "no-useless-constructor": "off",
+    "no-plusplus": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
