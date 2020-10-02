@@ -1,5 +1,6 @@
+import INotificationRepository from '@modules/Notifications/repositories/INotificationRepository';
 import AppError from '@shared/errors/AppError';
-import { getHours, isBefore, startOfHour } from 'date-fns';
+import { format, getHours, isBefore, startOfHour } from 'date-fns';
 import { inject, injectable } from 'tsyringe';
 import Appontment from '../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
@@ -15,6 +16,8 @@ class CreateAppointmentsService {
   constructor(
     @inject('AppointmentsRepository')
     private appointmentsRepository: IAppointmentsRepository,
+    @inject('NotificationRepository')
+    private notificationRepository: INotificationRepository,
   ) {}
 
   public async execute({
@@ -22,6 +25,7 @@ class CreateAppointmentsService {
     date,
     user_id,
   }: Request): Promise<Appontment> {
+    console.log({ provider_id, date, user_id });
     const appointmentDate = startOfHour(date);
 
     if (isBefore(appointmentDate, Date.now())) {
@@ -44,10 +48,19 @@ class CreateAppointmentsService {
       throw new AppError('date already exists');
     }
 
+    console.log({ provider_id, date: appointmentDate, user_id });
+
     const appointment = await this.appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
       user_id,
+    });
+
+    const dateFormated = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
+
+    await this.notificationRepository.create({
+      recipient_id: provider_id,
+      content: `Novo agendamento para dia ${dateFormated}`,
     });
 
     return appointment;

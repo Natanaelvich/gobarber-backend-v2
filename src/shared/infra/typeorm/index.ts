@@ -1,5 +1,5 @@
-import { createConnection } from 'typeorm';
+import { createConnections } from 'typeorm';
 
-createConnection()
+createConnections()
   .then(() => console.log('connection database success'))
   .catch(err => console.log('connection database failure', err));
