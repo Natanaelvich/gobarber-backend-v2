@@ -1,6 +1,8 @@
 package-lock.json
 yarn.lock
 yarn-error.log
+.env
+ormconfig.json
 /node_modules
 /dist
 /build
