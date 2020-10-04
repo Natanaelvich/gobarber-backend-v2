@@ -1,5 +1,6 @@
 import ShowUserService from '@modules/users/services/ShowUserService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -27,6 +28,6 @@ export default class UsersUpdateController {
       old_password,
     });
 
-    return response.json(user);
+    return response.json({ user: classToClass(user) });
   }
 }
