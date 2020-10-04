@@ -1,4 +1,5 @@
 import INotificationRepository from '@modules/Notifications/repositories/INotificationRepository';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import AppError from '@shared/errors/AppError';
 import { format, getHours, isBefore, startOfHour } from 'date-fns';
 import { inject, injectable } from 'tsyringe';
@@ -18,6 +19,8 @@ class CreateAppointmentsService {
     private appointmentsRepository: IAppointmentsRepository,
     @inject('NotificationRepository')
     private notificationRepository: INotificationRepository,
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -25,7 +28,6 @@ class CreateAppointmentsService {
     date,
     user_id,
   }: Request): Promise<Appontment> {
-    console.log({ provider_id, date, user_id });
     const appointmentDate = startOfHour(date);
 
     if (isBefore(appointmentDate, Date.now())) {
@@ -48,8 +50,6 @@ class CreateAppointmentsService {
       throw new AppError('date already exists');
     }
 
-    console.log({ provider_id, date: appointmentDate, user_id });
-
     const appointment = await this.appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
@@ -62,6 +62,12 @@ class CreateAppointmentsService {
       recipient_id: provider_id,
       content: `Novo agendamento para dia ${dateFormated}`,
     });
+    await this.cacheProvider.invalidate(
+      `provider_appointments:${provider_id}:${format(
+        appointmentDate,
+        'yyyy-M-d',
+      )}`,
+    );
 
     return appointment;
   }

@@ -12,12 +12,14 @@ import upload from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import { errors } from 'celebrate';
 import routes from './routes';
+import rateLimiterMiddleware from '../middlewares/rateLimit';
 
 const app = express();
 
+app.use(rateLimiterMiddleware);
 app.use(cors());
 app.use(express.json());
-app.use('/files', express.static(upload.uploadsFolder));
+app.use('/files', express.static(upload.tmpFolfer));
 app.use(routes);
 
 app.use(errors());

@@ -6,7 +6,7 @@ import IStorageProvider from '../models/IStorageProvider';
 export default class DiskStorageProvider implements IStorageProvider {
   public async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
-      path.resolve(upload.directory, file),
+      path.resolve(upload.tmpFolfer, file),
       path.resolve(upload.uploadsFolder, file),
     );
 

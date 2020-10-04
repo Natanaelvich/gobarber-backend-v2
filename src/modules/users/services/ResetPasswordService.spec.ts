@@ -1,7 +1,6 @@
 import FakeUserRepository from '@modules/users/repositories/fakes/FakeUserRepository';
 import AppError from '@shared/errors/AppError';
 import FakeBCryptHashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider copy';
-// import AppError from '@shared/errors/AppError';
 import FakeUserTokenRepository from '../repositories/fakes/FakeUserTokenRepository';
 import ResetPasswordService from './ResetPasswordService';
 

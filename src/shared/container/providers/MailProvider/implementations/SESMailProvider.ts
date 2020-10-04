@@ -32,7 +32,6 @@ export default class SESMailProvider implements IMailProvider {
   }: ISendMailDTO): Promise<void> {
     const { email, name } = mailConfig.defaults.from;
 
-    console.log('senmail');
     const responseMessage = await this.client.sendMail({
       from: {
         name: from?.name || name,
