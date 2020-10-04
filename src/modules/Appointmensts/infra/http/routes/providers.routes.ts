@@ -23,8 +23,9 @@ providersRouter.get(
     [Segments.PARAMS]: {
       provider_id: Joi.string().uuid().required(),
     },
-    [Segments.BODY]: {
-      day: Joi.string().required(),
+    [Segments.QUERY]: {
+      month: Joi.required(),
+      year: Joi.required(),
     },
   }),
   listProviderMonthAvaillabilityController.index,
@@ -35,16 +36,21 @@ providersRouter.get(
     [Segments.PARAMS]: {
       provider_id: Joi.string().uuid().required(),
     },
+    [Segments.QUERY]: {
+      day: Joi.required(),
+      month: Joi.required(),
+      year: Joi.required(),
+    },
   }),
   listProviderDayAvaillabilityController.index,
 );
 providersRouter.get(
   '/appointments',
   celebrate({
-    [Segments.BODY]: {
-      day: Joi.number(),
-      month: Joi.number(),
-      year: Joi.number(),
+    [Segments.QUERY]: {
+      day: Joi.required(),
+      month: Joi.required(),
+      year: Joi.required(),
     },
   }),
   listProviderAppointmestsService.index,
