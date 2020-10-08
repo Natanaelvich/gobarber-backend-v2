@@ -2,6 +2,7 @@ import multer, { StorageEngine } from 'multer';
 import path from 'path';
 import crypto from 'crypto';
 
+const tmpFolfer = path.resolve(__dirname, '..', '..', 'tmp');
 interface IUploadConfg {
   driver: 's3' | 'disk';
 
@@ -20,7 +21,6 @@ interface IUploadConfg {
   };
 }
 
-const tmpFolfer = path.resolve(__dirname, '..', '..', 'tmp');
 export default {
   driver: process.env.STORAGE_DRIVER,
 

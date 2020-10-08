@@ -19,7 +19,7 @@ const app = express();
 app.use(rateLimiterMiddleware);
 app.use(cors());
 app.use(express.json());
-app.use('/files', express.static(upload.tmpFolfer));
+app.use('/files', express.static(upload.uploadsFolder));
 app.use(routes);
 
 app.use(errors());
