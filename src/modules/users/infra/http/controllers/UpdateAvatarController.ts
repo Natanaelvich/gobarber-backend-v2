@@ -11,6 +11,6 @@ export default class UpdateAvatarController {
       avatarFileName: request.file.filename,
     });
 
-    return response.json({ user: classToClass(user) });
+    return response.json(classToClass(user));
   }
 }
