@@ -31,5 +31,5 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_KEY }}
-        source: "."
+        source: ".,!node_modules"
         target: "app/gobarber-backend-v2/"
