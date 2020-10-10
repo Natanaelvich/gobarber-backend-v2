@@ -54,7 +54,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
          cd ~/app/gobarber-backend-v2/
-         npm run typeorm migration:run
+         ./node_modules/.bin/typeorm migration:run
          
     - name: restart server
       uses: appleboy/ssh-action@master
