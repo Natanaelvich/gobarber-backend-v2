@@ -14,7 +14,7 @@ const mailConfig = {
 
   defaults: {
     from: {
-      email: 'taelima1997@gmail.com',
+      email: 'natanaelima@mundotech.dev',
       name: 'Natanael da Silva Lima',
     },
   },
