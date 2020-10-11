@@ -32,7 +32,7 @@ export default class SESMailProvider implements IMailProvider {
   }: ISendMailDTO): Promise<void> {
     const { email, name } = mailConfig.defaults.from;
 
-    const responseMessage = await this.client.sendMail({
+    await this.client.sendMail({
       from: {
         name: from?.name || name,
         address: from?.email || email,
@@ -44,11 +44,5 @@ export default class SESMailProvider implements IMailProvider {
       subject,
       html: await this.templateMailProvider.parse(templateData),
     });
-
-    console.log('Message sent: %s', responseMessage.messageId);
-    console.log(
-      'Preview URL: %s',
-      nodemailer.getTestMessageUrl(responseMessage),
-    );
   }
 }
