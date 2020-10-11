@@ -32,9 +32,7 @@ export default {
       destination: tmpFolfer,
       filename(request, file, callback) {
         const fileHash = crypto.randomBytes(10).toString('hex');
-        const fileName = `${fileHash}-${file.originalname
-          .trim()
-          .replace(/[^0-9]+/g, '')}`;
+        const fileName = `${fileHash}-${file.originalname}`;
 
         return callback(null, fileName);
       },
