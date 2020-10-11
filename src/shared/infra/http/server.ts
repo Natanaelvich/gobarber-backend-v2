@@ -16,6 +16,11 @@ import { errors } from 'celebrate';
 import routes from './routes';
 
 const app = express();
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+  }),
+);
 
 Sentry.init({
   dsn:
@@ -29,7 +34,6 @@ Sentry.init({
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
-app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(upload.uploadsFolder));
 app.use(routes);
