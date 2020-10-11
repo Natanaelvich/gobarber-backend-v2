@@ -45,7 +45,7 @@ class User {
         break;
       case 's3':
         return this.avatar
-          ? `$https://${upload.config.aws.bucket}.s3.amazonaws.com/${this.avatar}`
+          ? `https://${upload.config.aws.bucket}.s3.amazonaws.com/${this.avatar}`
           : null;
         break;
       default:
