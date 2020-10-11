@@ -16,11 +16,7 @@ import { errors } from 'celebrate';
 import routes from './routes';
 
 const app = express();
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-  }),
-);
+app.use(cors({ credentials: true, origin: true }));
 
 Sentry.init({
   dsn:
