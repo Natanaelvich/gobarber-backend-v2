@@ -1,5 +1,4 @@
 import ListProviderMonthAvaillabilityService from '@modules/Appointmensts/services/ListProviderMonthAvaillabilityService';
-import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
