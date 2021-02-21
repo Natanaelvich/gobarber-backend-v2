@@ -29,6 +29,8 @@ class ListProviderService {
       await this.cacheProvider.save(`providers-list:${user_id}`, users);
     }
 
+    console.log(users);
+
     return users;
   }
 }

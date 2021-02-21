@@ -26,6 +26,8 @@ class UserRepository implements IUserRepository {
       users = await this.ormRepository.find();
     }
 
+    console.log(users);
+
     return users;
   }
 
@@ -48,7 +50,7 @@ class UserRepository implements IUserRepository {
     name,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const response = await this.ormRepository.create({
+    const response = this.ormRepository.create({
       name,
       email,
       password,
