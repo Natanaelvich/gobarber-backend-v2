@@ -74,8 +74,6 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
-    console.log('appointmentDate - AppointmentsRepository');
-    console.log(appointmentDate);
     const appointment = this.ormRepository.create({
       provider_id,
       date: appointmentDate,
