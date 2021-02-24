@@ -28,10 +28,12 @@ class CreateAppointmentsService {
     date,
     user_id,
   }: Request): Promise<Appontment> {
+    const test = new Date(date);
     const appointmentDate = startOfHour(date);
 
     console.log(date);
     console.log(appointmentDate);
+    console.log(test);
 
     if (isBefore(appointmentDate, Date.now())) {
       throw new AppError("You can't create an appointment on a past date");
