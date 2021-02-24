@@ -31,8 +31,6 @@ class CreateAppointmentsService {
   }: Request): Promise<Appontment> {
     const dateStartHour = startOfHour(date);
     const appointmentDate = utcToZonedTime(dateStartHour, 'America/Sao_Paulo');
-    console.log(dateStartHour);
-    console.log(appointmentDate);
 
     if (isBefore(appointmentDate, Date.now())) {
       throw new AppError("You can't create an appointment on a past date");
