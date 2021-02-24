@@ -28,14 +28,9 @@ class CreateAppointmentsService {
     date,
     user_id,
   }: Request): Promise<Appontment> {
-    const test = new Date(date);
     const appointmentDate = startOfHour(date);
 
-    console.log(date);
-    console.log(appointmentDate);
-    console.log(test);
-
-    if (isBefore(appointmentDate, Date.now())) {
+    if (isBefore(date, Date.now())) {
       throw new AppError("You can't create an appointment on a past date");
     }
 
@@ -43,12 +38,12 @@ class CreateAppointmentsService {
       throw new AppError("You can't create an appointment with youself");
     }
 
-    if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 17) {
+    if (getHours(date) < 8 || getHours(date) > 17) {
       throw new AppError('You only create an appointment between 8am and 5pm');
     }
 
     const dateExists = await this.appointmentsRepository.findByDate(
-      appointmentDate,
+      date,
       provider_id,
     );
 
@@ -58,13 +53,12 @@ class CreateAppointmentsService {
 
     const appointment = await this.appointmentsRepository.create({
       provider_id,
-      date: appointmentDate,
+      date,
       user_id,
     });
 
-    const dateFormated = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
+    const dateFormated = format(date, "dd/MM/yyyy 'às' HH:mm'h'");
 
-    console.log(dateFormated);
     await this.notificationRepository.create({
       recipient_id: provider_id,
       content: `Novo agendamento para dia ${dateFormated}`,
