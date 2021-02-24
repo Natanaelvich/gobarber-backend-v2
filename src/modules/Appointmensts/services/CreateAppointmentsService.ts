@@ -2,6 +2,7 @@ import INotificationRepository from '@modules/Notifications/repositories/INotifi
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import AppError from '@shared/errors/AppError';
 import { format, getHours, isBefore, startOfHour } from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
 import { inject, injectable } from 'tsyringe';
 import Appontment from '../infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
@@ -29,6 +30,10 @@ class CreateAppointmentsService {
     user_id,
   }: Request): Promise<Appontment> {
     const appointmentDate = startOfHour(date);
+    const etst = utcToZonedTime(date, 'America/Sao_Paulo');
+    console.log(appointmentDate);
+    console.log(date);
+    console.log(etst);
 
     if (isBefore(date, Date.now())) {
       throw new AppError("You can't create an appointment on a past date");
