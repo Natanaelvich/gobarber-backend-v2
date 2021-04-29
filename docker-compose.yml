@@ -29,7 +29,7 @@ services:
     container_name: gobarber
     restart: always
     ports:
-      - 3335:3335
+      - 3333:3333
     volumes:
       - .:/usr/app
     links:
